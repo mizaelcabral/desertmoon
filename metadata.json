@@ -1,0 +1,5 @@
+{
+  "name": "Portal de Cadastro de Pacientes",
+  "description": "Formulário para cadastro e coleta de documentos médicos, financeiros e administrativos.",
+  "requestFramePermissions": []
+}
