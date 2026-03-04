@@ -49,7 +49,7 @@ const FileUpload = ({ label, id, icon: Icon, required = false, description = '',
   const handleAction = (e: React.MouseEvent) => {
     e.preventDefault();
     if (actionLink) {
-      window.open(actionLink, 'ZapSign', 'width=800,height=900,scrollbars=yes');
+      window.open(actionLink, '_blank');
     }
   };
 
