@@ -157,7 +157,7 @@ export default function App() {
         mode: 'no-cors', // Apps Script doesn't support CORS easily with POST from different domains
         body: JSON.stringify(payload),
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'text/plain;charset=utf-8'
         }
       });
 
