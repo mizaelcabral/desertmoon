@@ -201,7 +201,7 @@ export default function App() {
 
         <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex flex-col justify-center items-center text-center">
           <div className="mb-8">
-            <div className="inline-block bg-white p-4 rounded-2xl shadow-2xl">
+            <div className="inline-block bg-white p-4 rounded-2xl">
               <img
                 src="https://static.wixstatic.com/media/0059f9_2d6a863718e64a989d506cc12767b9c6~mv2.jpg/v1/fill/w_200,h_142,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/Captura%20de%20tela%202025-07-11%20125713_edited.jpg"
                 alt="Logo da Empresa"
@@ -421,17 +421,17 @@ export default function App() {
 
       {/* Footer */}
       <footer className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mt-16 pb-8">
-        <div className="bg-slate-900 text-slate-300 rounded-2xl p-8 sm:p-10 shadow-xl">
+        <div className="bg-[#944BB2] text-white rounded-2xl p-8 sm:p-10 shadow-xl">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
             <div>
               <h4 className="text-white font-bold text-lg mb-4 flex items-center gap-2">
                 <Info className="w-5 h-5 text-amber-500" />
                 Aviso Legal
               </h4>
-              <p className="text-sm leading-relaxed text-slate-400">
-                Os produtos Desert Moon CBD não são comercializados em território brasileiro. As aquisições são realizadas nos Estados Unidos, e a importação ocorre exclusivamente no CPF do paciente, conforme <strong className="text-slate-200">Resolução RDC nº 660, de 30 de março de 2022</strong>. A Desert Moon CBD Brasil presta apenas serviços administrativos e de suporte ao processo de importação.
+              <p className="text-sm leading-relaxed text-purple-100">
+                Os produtos Desert Moon CBD não são comercializados em território brasileiro. As aquisições são realizadas nos Estados Unidos, e a importação ocorre exclusivamente no CPF do paciente, conforme <strong className="text-white">Resolução RDC nº 660, de 30 de março de 2022</strong>. A Desert Moon CBD Brasil presta apenas serviços administrativos e de suporte ao processo de importação.
               </p>
-              <a href="https://www.gov.br/anvisa/pt-br/centraisdeconteudo/publicacoes/medicamentos/controlados/nota-tecnica-39-de-2021-produtos-cannabis" target="_blank" rel="noopener noreferrer" className="inline-block mt-4 text-xs text-amber-500 hover:text-amber-400 underline underline-offset-2">
+              <a href="https://www.gov.br/anvisa/pt-br/centraisdeconteudo/publicacoes/medicamentos/controlados/nota-tecnica-39-de-2021-produtos-cannabis" target="_blank" rel="noopener noreferrer" className="inline-block mt-4 text-xs text-amber-300 hover:text-amber-200 underline underline-offset-2">
                 NOTA TÉCNICA Nº 76/2025/SEI/COCIC/GPCON/DIRE5/ANVISA
               </a>
             </div>
@@ -439,21 +439,21 @@ export default function App() {
               <h4 className="text-white font-bold text-lg mb-4">Contato</h4>
               <ul className="space-y-3 text-sm">
                 <li className="flex items-start gap-3">
-                  <Phone className="w-4 h-4 text-amber-500 shrink-0 mt-0.5" />
+                  <Phone className="w-4 h-4 text-amber-300 shrink-0 mt-0.5" />
                   <a href="https://wa.me/17603300145" className="hover:text-white transition-colors">+1 760 330 0145</a>
                 </li>
                 <li className="flex items-start gap-3">
-                  <Mail className="w-4 h-4 text-amber-500 shrink-0 mt-0.5" />
+                  <Mail className="w-4 h-4 text-amber-300 shrink-0 mt-0.5" />
                   <a href="mailto:desertmooncbd@gmail.com" className="hover:text-white transition-colors">desertmooncbd@gmail.com</a>
                 </li>
                 <li className="flex items-start gap-3">
-                  <MapPin className="w-4 h-4 text-amber-500 shrink-0 mt-0.5" />
+                  <MapPin className="w-4 h-4 text-amber-300 shrink-0 mt-0.5" />
                   <span>AVENIDA DAS AMERICAS, 4200, BL 1 SALA 305<br />BARRA DA TIJUCA, RIO DE JANEIRO, RJ<br />CEP 22.640-907</span>
                 </li>
               </ul>
             </div>
           </div>
-          <div className="border-t border-slate-800 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+          <div className="border-t border-purple-400/30 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-purple-200">
             <p>© Copyright DesertMoon CBD Brasil © 2025 – Todos os direitos reservados.</p>
             <div className="flex gap-4">
               <a href="https://www.desertmooncbdbrasil.com.br/termos-e-condi%C3%A7%C3%B5es" target="_blank" rel="noopener noreferrer" className="hover:text-slate-300 transition-colors">Termos e Condições</a>
