@@ -197,19 +197,9 @@ export default function App() {
   return (
     <div className="min-h-screen bg-stone-50 font-sans text-slate-900 pb-20">
       {/* Header with Background Image */}
-      <header className="relative h-auto sm:h-[580px] w-full overflow-hidden pb-16 sm:pb-0">
-        <div className="absolute inset-0">
-          <img
-            src="/images/nano_banana.png"
-            alt="Laboratório CBD Background"
-            className="w-full h-full object-cover"
-            referrerPolicy="no-referrer"
-          />
-          <div className="absolute inset-0 bg-slate-900/90 mix-blend-multiply" />
-          <div className="absolute inset-0 bg-gradient-to-t from-stone-50 via-transparent to-transparent" />
-        </div>
+      <header className="relative w-full py-12 sm:pt-20 sm:pb-32 bg-white border-b border-slate-100">
 
-        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex flex-col justify-center items-center text-center pt-12 sm:pt-20">
+        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex flex-col justify-center items-center text-center">
           <div className="mb-8">
             <div className="inline-block bg-white p-4 rounded-2xl shadow-2xl">
               <img
@@ -220,29 +210,29 @@ export default function App() {
               />
             </div>
           </div>
-          <h2 className="text-3xl sm:text-5xl font-extrabold text-white mb-4 drop-shadow-md">
+          <h2 className="text-3xl sm:text-5xl font-extrabold text-slate-900 mb-4">
             Cadastro de Paciente – DesertMoon Brasil
           </h2>
-          <p className="text-amber-100 max-w-2xl text-lg sm:text-xl mb-10 drop-shadow">
+          <p className="text-slate-600 max-w-2xl text-lg sm:text-xl mb-12">
             Preencha o formulário abaixo com seus dados e documentos para iniciar o seu tratamento com CBD de forma segura e legal no Brasil.
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-4xl w-full text-left">
-            <div className="flex items-start gap-3 bg-slate-900/60 backdrop-blur-md p-5 rounded-xl border border-white/10 shadow-lg">
-              <Shield className="w-6 h-6 text-amber-400 shrink-0 mt-0.5" />
-              <p className="text-sm text-white font-medium">Produção com Boas Práticas de Fabricação (GMP)</p>
+            <div className="flex items-start gap-3 bg-slate-50 p-5 rounded-xl border border-slate-200 shadow-sm">
+              <Shield className="w-6 h-6 text-amber-600 shrink-0 mt-0.5" />
+              <p className="text-sm text-slate-700 font-medium">Produção com Boas Práticas de Fabricação (GMP)</p>
             </div>
-            <div className="flex items-start gap-3 bg-slate-900/60 backdrop-blur-md p-5 rounded-xl border border-white/10 shadow-lg">
-              <Award className="w-6 h-6 text-amber-400 shrink-0 mt-0.5" />
-              <p className="text-sm text-white font-medium">Certificados de Análise (COAs) disponíveis para todos os lotes</p>
+            <div className="flex items-start gap-3 bg-slate-50 p-5 rounded-xl border border-slate-200 shadow-sm">
+              <Award className="w-6 h-6 text-amber-600 shrink-0 mt-0.5" />
+              <p className="text-sm text-slate-700 font-medium">Certificados de Análise (COAs) disponíveis para todos os lotes</p>
             </div>
-            <div className="flex items-start gap-3 bg-slate-900/60 backdrop-blur-md p-5 rounded-xl border border-white/10 shadow-lg">
-              <Globe className="w-6 h-6 text-amber-400 shrink-0 mt-0.5" />
-              <p className="text-sm text-white font-medium">Rastreamento completo da origem ao destino</p>
+            <div className="flex items-start gap-3 bg-slate-50 p-5 rounded-xl border border-slate-200 shadow-sm">
+              <Globe className="w-6 h-6 text-amber-600 shrink-0 mt-0.5" />
+              <p className="text-sm text-slate-700 font-medium">Rastreamento completo da origem ao destino</p>
             </div>
-            <div className="flex items-start gap-3 bg-slate-900/60 backdrop-blur-md p-5 rounded-xl border border-white/10 shadow-lg">
-              <Leaf className="w-6 h-6 text-amber-400 shrink-0 mt-0.5" />
-              <p className="text-sm text-white font-medium">Compromisso com sustentabilidade e respeito ao meio ambiente</p>
+            <div className="flex items-start gap-3 bg-slate-50 p-5 rounded-xl border border-slate-200 shadow-sm">
+              <Leaf className="w-6 h-6 text-amber-600 shrink-0 mt-0.5" />
+              <p className="text-sm text-slate-700 font-medium">Compromisso com sustentabilidade e respeito ao meio ambiente</p>
             </div>
           </div>
         </div>
