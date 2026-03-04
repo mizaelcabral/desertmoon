@@ -205,7 +205,7 @@ export default function App() {
               <img
                 src="https://static.wixstatic.com/media/0059f9_2d6a863718e64a989d506cc12767b9c6~mv2.jpg/v1/fill/w_200,h_142,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/Captura%20de%20tela%202025-07-11%20125713_edited.jpg"
                 alt="Logo da Empresa"
-                className="h-20 sm:h-24 w-auto object-contain"
+                className="h-28 sm:h-36 w-auto object-contain"
                 referrerPolicy="no-referrer"
               />
             </div>
