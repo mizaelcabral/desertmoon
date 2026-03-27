@@ -213,26 +213,26 @@ export default function App() {
           <h2 className="text-3xl sm:text-5xl font-extrabold text-slate-900 mb-4">
             Cadastro de Paciente – DesertMoon Brasil
           </h2>
-          <p className="text-slate-600 max-w-2xl text-lg sm:text-xl mb-12">
-            Preencha o formulário abaixo com seus dados e documentos para iniciar o seu tratamento com CBD de forma segura e legal no Brasil.
+          <p className="text-slate-600 max-w-3xl text-lg sm:text-xl mb-12">
+            Preencha o formulário abaixo com seus dados e documentos para iniciarmos a organização do seu processo de judicialização de forma segura e estruturada
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-4xl w-full text-left">
             <div className="flex items-start gap-3 bg-slate-50 p-5 rounded-xl border border-slate-200 shadow-sm">
               <Shield className="w-6 h-6 text-amber-600 shrink-0 mt-0.5" />
-              <p className="text-sm text-slate-700 font-medium">Produção com Boas Práticas de Fabricação (GMP)</p>
+              <p className="text-sm text-slate-700 font-medium">Organização da documentação para o processo judicial</p>
             </div>
             <div className="flex items-start gap-3 bg-slate-50 p-5 rounded-xl border border-slate-200 shadow-sm">
               <Award className="w-6 h-6 text-amber-600 shrink-0 mt-0.5" />
-              <p className="text-sm text-slate-700 font-medium">Certificados de Análise (COAs) disponíveis para todos os lotes</p>
+              <p className="text-sm text-slate-700 font-medium">Acompanhamento das etapas da judicialização</p>
             </div>
             <div className="flex items-start gap-3 bg-slate-50 p-5 rounded-xl border border-slate-200 shadow-sm">
               <Globe className="w-6 h-6 text-amber-600 shrink-0 mt-0.5" />
-              <p className="text-sm text-slate-700 font-medium">Rastreamento completo da origem ao destino</p>
+              <p className="text-sm text-slate-700 font-medium">Registro e controle das informações do paciente</p>
             </div>
             <div className="flex items-start gap-3 bg-slate-50 p-5 rounded-xl border border-slate-200 shadow-sm">
               <Leaf className="w-6 h-6 text-amber-600 shrink-0 mt-0.5" />
-              <p className="text-sm text-slate-700 font-medium">Compromisso com sustentabilidade e respeito ao meio ambiente</p>
+              <p className="text-sm text-slate-700 font-medium">Suporte durante o andamento do processo</p>
             </div>
           </div>
         </div>

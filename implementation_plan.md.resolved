@@ -1,0 +1,53 @@
+# Implementation Plan - Debugging Google Drive Integration
+
+The goal is to fix the issue where form data is not reaching Google Drive. The primary suspect is **CORS preflight blocking** by the browser when using `application/json`.
+
+## Architecture Refresh
+
+1.  **React App (Frontend)**:
+    - Sends the payload as `text/plain`. This makes it a "Simple Request" in CORS terms, avoiding the `OPTIONS` preflight that Google Apps Script (GAS) does not support.
+2.  **Google Apps Script (Backend)**:
+    - Continues to parse the body as JSON.
+    - Improved validation to ensure the `FOLDER_ID` is valid.
+
+## Proposed Changes
+
+### Frontend (React)
+
+#### [MODIFY] [App.tsx](file:///c:/Users/brand/OneDrive/Documentos/CLIENTES%20BRANDI%20AI/DESERTMOON/src/App.tsx)
+
+- Update [handleSubmit](file:///c:/Users/brand/OneDrive/Documentos/CLIENTES%20BRANDI%20AI/DESERTMOON/src/App.tsx#143-174):
+  - Change `Content-Type` to `text/plain;charset=utf-8`.
+  - Ensure the payload is correctly stringified.
+
+### SEO and Metadata
+
+#### [MODIFY] [index.html](file:///c:/Users/brand/OneDrive/Documentos/CLIENTES%20BRANDI%20AI/DESERTMOON/index.html)
+
+- Update `<title>` to "Cadastro de Paciente – DesertMoon Brasil".
+- Add `<meta name="description">` with a professional summary.
+- Add Open Graph (OG) tags:
+  - `og:title`, `og:description`, `og:image`, `og:url`.
+- Add Twitter card tags.
+
+### Backend (Google Apps Script)
+
+#### [MODIFY] [GoogleDriveBridge.gs.md](file:///C:/Users/brand/.gemini/antigravity/brain/c29785ae-c122-49b3-aef6-b4fc9d7c5a63/GoogleDriveBridge.gs.md)
+
+- Update the script template:
+  - Add explicit error checks for the `FOLDER_ID`.
+  - Add logging to help the user identify issues in the "Executions" tab of GAS.
+
+## Verification Plan
+
+### Manual Verification
+1.  **Check GAS Executions**:
+    - Go to [script.google.com](https://script.google.com) > Open your project.
+    - Click **"Execuções"** (Executions) on the left sidebar.
+    - Check if any requests are listed and if they finished with "Completed" or "Failed".
+2.  **Redeploy the Script**:
+    - Click **"Implantar"** (Deploy) > **"Gerenciar Implantações"** (Manage Deployments).
+    - Edit the existing deployment and select **"Nova Versão"** (New Version).
+    - Ensure access is still set to "Anyone".
+3.  **Test the Form**:
+    - Fill out the form and submit.

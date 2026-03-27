@@ -1,0 +1,56 @@
+# Passo a Passo - Integração com Google Drive
+
+O formulário de cadastro da DesertMoon Brasil foi atualizado com um novo design limpo e a capacidade de enviar dados e arquivos diretamente para o seu Google Drive.
+
+## Mudanças Realizadas
+
+### Design de Interface (UI)
+
+#### [App.tsx](file:///c:/Users/brand/OneDrive/Documentos/CLIENTES BRANDI AI/DESERTMOON/src/App.tsx)
+- **Cabeçalho Limpo**: Removida a imagem de fundo e os efeitos de sombra/escurecimento para um visual mais "Premium" e minimalista.
+- **Assinaturas Mobile**: Corrigido o problema onde os popups de assinatura do ZapSign eram bloqueados em celulares. Agora eles abrem de forma confiável em uma nova aba.
+- **Fundo Branco**: O cabeçalho agora possui fundo branco sólido com textos em cinza escuro (`slate-900`), melhorando a legibilidade.
+- **Cartões de Informação**: Os cartões (GMP, COAs, etc.) foram atualizados para um estilo claro com bordas sutis.
+- **Rodapé (Footer)**: O rodapé agora utiliza a cor personalizada `#944BB2` com textos em tons claros para contraste e elegância.
+- **Otimização de Compartilhamento (SEO)**: Adicionadas tags meta e Open Graph para que, ao compartilhar o link (WhatsApp, Redes Sociais), apareçam o título, descrição e logo oficiais da DesertMoon Brasil.
+- **Logo**: Aumentado o tamanho do logo no cabeçalho para maior destaque e removida sua sombra para um visual mais limpo e plano.
+
+### Frontend (React)
+
+#### [App.tsx](file:///c:/Users/brand/OneDrive/Documentos/CLIENTES BRANDI AI/DESERTMOON/src/App.tsx)
+
+1.  **Processamento de Arquivos**:
+    - Atualizado o componente [FileUpload](file:///c:/Users/brand/OneDrive/Documentos/CLIENTES%20BRANDI%20AI/DESERTMOON/src/App.tsx#27-122) para ler arquivos como strings **Base64** imediatamente após a seleção, utilizando `FileReader`.
+    - Adicionado um callback pai (`onFileSelect`) para coletar essas strings no estado principal do formulário.
+2.  **Envio do Formulário**:
+    - Implementado [handleSubmit](file:///c:/Users/brand/OneDrive/Documentos/CLIENTES%20BRANDI%20AI/DESERTMOON/src/App.tsx#143-174) para agrupar todos os campos de texto e dados de arquivo em um único payload JSON.
+    - Adicionada uma requisição `fetch` para o `GOOGLE_SCRIPT_URL`. 
+    - *Nota*: Definido `mode: 'no-cors'` para compatibilidade com o comportamento de redirecionamento do Google Apps Script.
+
+### Backend (Google Apps Script)
+
+Eu forneci um modelo [GoogleDriveBridge.gs](file:///C:/Users/brand/.gemini/antigravity/brain/c29785ae-c122-49b3-aef6-b4fc9d7c5a63/GoogleDriveBridge.gs.md) que irá:
+- Receber os dados do formulário.
+- Criar uma pasta dedicada para cada paciente.
+- Salvar um arquivo de texto de resumo com as informações do paciente.
+- Salvar cada arquivo enviado com seu nome e tipo originais.
+
+## Próximos Passos para Você
+
+Para tornar a integração ativa, siga estes passos:
+
+1.  **Implantar o Script**:
+    - Siga as instruções dentro do arquivo [GoogleDriveBridge.gs](file:///C:/Users/brand/.gemini/antigravity/brain/c29785ae-c122-49b3-aef6-b4fc9d7c5a63/GoogleDriveBridge.gs.md).
+    - **Crucial**: Certifique-se de que "Quem tem acesso" (Who has access) esteja configurado como "Qualquer pessoa" (Anyone) ao implantar como um Aplicativo Web (Web App).
+2.  **Atualizar o Código React**:
+    - No arquivo [src/App.tsx](file:///c:/Users/brand/OneDrive/Documentos/CLIENTES%20BRANDI%20AI/DESERTMOON/src/App.tsx), procure pela linha 116:
+      ```tsx
+      const GOOGLE_SCRIPT_URL = 'COLE_AQUI_SEU_URL_DO_GOOGLE_SCRIPT';
+      ```
+    - Substitua esse marcador pelo **URL do Aplicativo Web** que você obteve na implantação do Google.
+
+## Resultados da Verificação
+
+- **Verificação Automática**: `npm run build` passou com sucesso.
+- **Estado do Formulário**: Verificado que a escolha de arquivos agora atualiza o estado interno com dados Base64.
+- **Segurança**: Nenhum arquivo é enviado para o servidor da Vercel; eles vão diretamente do navegador do usuário para o seu Google Drive.
