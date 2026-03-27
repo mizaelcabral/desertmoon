@@ -182,7 +182,15 @@ export default function App() {
   if (isSuccess) {
     return (
       <div className="min-h-screen bg-slate-50 flex items-center justify-center p-4">
-        <div className="bg-white p-8 rounded-2xl shadow-xl max-w-md w-full text-center space-y-4">
+        <div className="bg-white p-8 rounded-2xl shadow-xl max-w-md w-full text-center space-y-6">
+          <div className="flex justify-center mb-2">
+            <img
+              src="https://static.wixstatic.com/media/0059f9_2d6a863718e64a989d506cc12767b9c6~mv2.jpg/v1/fill/w_200,h_142,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/Captura%20de%20tela%202025-07-11%20125713_edited.jpg"
+              alt="Logo Desert Moon"
+              className="h-20 w-auto object-contain"
+              referrerPolicy="no-referrer"
+            />
+          </div>
           <div className="w-16 h-16 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center mx-auto mb-4">
             <CheckCircle className="w-8 h-8" />
           </div>
@@ -278,15 +286,15 @@ export default function App() {
 
                 <div className="space-y-4">
                   <div>
-                    <label htmlFor="respName" className="block text-sm font-semibold text-slate-800 mb-1">Nome do Responsável *</label>
-                    <input type="text" id="respName" required value={formData.respName} onChange={handleInputChange} className="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition-all" placeholder="Ex: Maria da Silva" />
+                    <label htmlFor="respName" className="block text-sm font-semibold text-slate-800 mb-1">Nome do Responsável (se houver)</label>
+                    <input type="text" id="respName" value={formData.respName} onChange={handleInputChange} className="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition-all" placeholder="Ex: Maria da Silva" />
                   </div>
                   <FileUpload
                     id="docResp"
                     label="RG e CPF do Responsável"
                     icon={FileBadge}
-                    required={true}
-                    description="Cópia legível frente e verso (Obrigatório)."
+                    required={false}
+                    description="Apenas se o paciente for menor ou incapaz."
                     onFileSelect={(data) => handleFileSelect('docResp', data)}
                   />
                 </div>
@@ -308,8 +316,8 @@ export default function App() {
                   <input type="text" id="neighborhood" required value={formData.neighborhood} onChange={handleInputChange} className="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition-all" placeholder="Ex: Centro" />
                 </div>
                 <div className="md:col-span-1">
-                  <label htmlFor="complement" className="block text-sm font-semibold text-slate-800 mb-1">Complemento *</label>
-                  <input type="text" id="complement" required value={formData.complement} onChange={handleInputChange} className="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition-all" placeholder="Ex: Apto 402" />
+                  <label htmlFor="complement" className="block text-sm font-semibold text-slate-800 mb-1">Complemento</label>
+                  <input type="text" id="complement" value={formData.complement} onChange={handleInputChange} className="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition-all" placeholder="Ex: Apto 402" />
                 </div>
                 <div className="md:col-span-1">
                   <label htmlFor="city" className="block text-sm font-semibold text-slate-800 mb-1">Cidade *</label>
