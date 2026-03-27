@@ -124,6 +124,13 @@ export default function App() {
   const [formData, setFormData] = useState<any>({
     patientName: '',
     respName: '',
+    cep: '',
+    street: '',
+    number: '',
+    complement: '',
+    neighborhood: '',
+    city: '',
+    state: '',
   });
   const [files, setFiles] = useState<Record<string, { name: string, type: string, base64: string }>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -271,16 +278,46 @@ export default function App() {
 
                 <div className="space-y-4">
                   <div>
-                    <label htmlFor="respName" className="block text-sm font-semibold text-slate-800 mb-1">Nome do Responsável (se houver)</label>
-                    <input type="text" id="respName" value={formData.respName} onChange={handleInputChange} className="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition-all" placeholder="Ex: Maria da Silva" />
+                    <label htmlFor="respName" className="block text-sm font-semibold text-slate-800 mb-1">Nome do Responsável *</label>
+                    <input type="text" id="respName" required value={formData.respName} onChange={handleInputChange} className="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition-all" placeholder="Ex: Maria da Silva" />
                   </div>
                   <FileUpload
                     id="docResp"
                     label="RG e CPF do Responsável"
                     icon={FileBadge}
-                    description="Apenas se o paciente for menor ou incapaz."
+                    required={true}
+                    description="Cópia legível frente e verso (Obrigatório)."
                     onFileSelect={(data) => handleFileSelect('docResp', data)}
                   />
+                </div>
+
+                <div className="md:col-span-1">
+                  <label htmlFor="cep" className="block text-sm font-semibold text-slate-800 mb-1">CEP *</label>
+                  <input type="text" id="cep" required value={formData.cep} onChange={handleInputChange} className="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition-all" placeholder="00000-000" />
+                </div>
+                <div className="md:col-span-1">
+                  <label htmlFor="street" className="block text-sm font-semibold text-slate-800 mb-1">Logradouro (Rua/Av/etc) *</label>
+                  <input type="text" id="street" required value={formData.street} onChange={handleInputChange} className="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition-all" placeholder="Ex: Rua das Flores" />
+                </div>
+                <div className="md:col-span-1">
+                  <label htmlFor="number" className="block text-sm font-semibold text-slate-800 mb-1">Número *</label>
+                  <input type="text" id="number" required value={formData.number} onChange={handleInputChange} className="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition-all" placeholder="Ex: 123" />
+                </div>
+                <div className="md:col-span-1">
+                  <label htmlFor="neighborhood" className="block text-sm font-semibold text-slate-800 mb-1">Bairro *</label>
+                  <input type="text" id="neighborhood" required value={formData.neighborhood} onChange={handleInputChange} className="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition-all" placeholder="Ex: Centro" />
+                </div>
+                <div className="md:col-span-1">
+                  <label htmlFor="complement" className="block text-sm font-semibold text-slate-800 mb-1">Complemento *</label>
+                  <input type="text" id="complement" required value={formData.complement} onChange={handleInputChange} className="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition-all" placeholder="Ex: Apto 402" />
+                </div>
+                <div className="md:col-span-1">
+                  <label htmlFor="city" className="block text-sm font-semibold text-slate-800 mb-1">Cidade *</label>
+                  <input type="text" id="city" required value={formData.city} onChange={handleInputChange} className="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition-all" placeholder="Ex: Rio de Janeiro" />
+                </div>
+                <div className="md:col-span-2">
+                  <label htmlFor="state" className="block text-sm font-semibold text-slate-800 mb-1">Estado *</label>
+                  <input type="text" id="state" required value={formData.state} onChange={handleInputChange} className="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition-all" placeholder="Ex: RJ" />
                 </div>
 
                 <div className="md:col-span-2">
@@ -347,7 +384,8 @@ export default function App() {
                   id="docDeclaration"
                   label="Declaração de Hipossuficiência"
                   icon={FileSignature}
-                  description="Documento assinado declarando incapacidade financeira."
+                  required={true}
+                  description="Documento assinado declarando incapacidade financeira (Obrigatório)."
                   actionLink="https://app.zapsign.com.br/verificar/doc/9508ca67-e761-4056-bd7c-ac69c5499bad"
                   actionLabel="Assinar Online"
                   fullWidthAction={true}
