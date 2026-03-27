@@ -21,11 +21,14 @@ import {
   Phone,
   Mail,
   MapPin,
-  Info
+  Info,
+  X,
+  Loader2
 } from 'lucide-react';
 
-const FileUpload = ({ label, id, icon: Icon, required = false, description = '', actionLink, actionLabel, fullWidthAction = false, onFileSelect }: { label: string, id: string, icon: any, required?: boolean, description?: string, actionLink?: string, actionLabel?: string, fullWidthAction?: boolean, onFileSelect?: (file: { name: string, type: string, base64: string }) => void }) => {
+const FileUpload = ({ label, id, icon: Icon, required = false, description = '', actionLink, actionLabel, fullWidthAction = false, helpText, onFileSelect, onActionClick }: { label: string, id: string, icon: any, required?: boolean, description?: string, actionLink?: string, actionLabel?: string, fullWidthAction?: boolean, helpText?: string, onFileSelect?: (file: { name: string, type: string, base64: string }) => void, onActionClick?: (url: string) => void }) => {
   const [fileName, setFileName] = useState('');
+  const [showHelp, setShowHelp] = useState(false);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
@@ -49,7 +52,11 @@ const FileUpload = ({ label, id, icon: Icon, required = false, description = '',
   const handleAction = (e: React.MouseEvent) => {
     e.preventDefault();
     if (actionLink) {
-      window.open(actionLink, '_blank');
+      if (onActionClick) {
+        onActionClick(actionLink);
+      } else {
+        window.open(actionLink, '_blank');
+      }
     }
   };
 
@@ -60,8 +67,30 @@ const FileUpload = ({ label, id, icon: Icon, required = false, description = '',
           htmlFor={fullWidthAction ? undefined : id}
           className={`text-sm font-semibold text-slate-800 flex items-center gap-2 ${fullWidthAction ? 'mb-1' : ''}`}
         >
-          <Icon className="w-4 h-4 text-amber-600" />
           {label} {required && <span className="text-red-500">*</span>}
+          {helpText && (
+            <div className="relative inline-block ml-1">
+              <button
+                type="button"
+                onClick={() => setShowHelp(!showHelp)}
+                onBlur={() => setTimeout(() => setShowHelp(false), 200)}
+                className="p-1 hover:bg-slate-100 rounded-full transition-colors flex items-center justify-center"
+                title="Saber mais"
+              >
+                <Info className="w-4 h-4 text-blue-500" />
+              </button>
+              {showHelp && (
+                <div className="absolute left-1/2 -translate-x-1/2 bottom-full mb-3 w-72 p-4 bg-slate-900 text-white text-xs leading-relaxed rounded-xl shadow-2xl z-[100] border border-slate-700 animate-in fade-in zoom-in-95 duration-200">
+                  <div className="font-bold mb-1 border-b border-slate-700 pb-1 flex items-center gap-2">
+                    <Info className="w-3 h-3 text-blue-400" />
+                    Informação Importante
+                  </div>
+                  {helpText}
+                  <div className="absolute top-full left-1/2 -translate-x-1/2 w-3 h-3 bg-slate-900 border-r border-b border-slate-700 rotate-45 -mt-1.5"></div>
+                </div>
+              )}
+            </div>
+          )}
         </label>
         {actionLink && !fullWidthAction && (
           <button
@@ -120,6 +149,44 @@ const FileUpload = ({ label, id, icon: Icon, required = false, description = '',
   );
 };
 
+const SignatureModal = ({ url, onClose }: { url: string | null, onClose: () => void }) => {
+  if (!url) return null;
+  return (
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 bg-slate-900/80 backdrop-blur-sm animate-in fade-in duration-300">
+      <div className="bg-white w-full max-w-5xl h-[90vh] rounded-3xl overflow-hidden shadow-2xl relative flex flex-col animate-in zoom-in-95 duration-300">
+        <div className="p-4 border-b border-slate-100 flex items-center justify-between bg-slate-50">
+          <div className="flex items-center gap-3">
+            <div className="p-2 bg-amber-100 rounded-lg">
+              <FileSignature className="w-5 h-5 text-amber-600" />
+            </div>
+            <div>
+              <h3 className="font-bold text-slate-800">Assinatura Digital</h3>
+              <p className="text-[10px] text-slate-500 uppercase tracking-wider font-semibold">Desert Moon & ZapSign</p>
+            </div>
+          </div>
+          <button 
+            onClick={onClose} 
+            className="p-2 hover:bg-slate-200 rounded-xl transition-colors text-slate-500 hover:text-slate-800"
+          >
+            <X className="w-6 h-6" />
+          </button>
+        </div>
+        <div className="flex-1 w-full h-full bg-slate-100 relative">
+          <iframe 
+            src={url} 
+            className="w-full h-full border-none shadow-inner"
+            title="ZapSign Signature"
+            allow="camera; microphone"
+          />
+        </div>
+        <div className="p-4 bg-white border-t border-slate-100 text-center">
+          <p className="text-xs text-slate-500 italic">Após finalizar a assinatura, você pode fechar este popup.</p>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 export default function App() {
   const [formData, setFormData] = useState<any>({
     patientName: '',
@@ -136,6 +203,7 @@ export default function App() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [errorHeader, setErrorHeader] = useState<string | null>(null);
+  const [activeSignatureUrl, setActiveSignatureUrl] = useState<string | null>(null);
 
   const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzzj4ZHm6BVpOBI2osYAmjcNEYychUpqDR4i4YKFmV7hqIb32qa7lS8JKISM0cI-UYW/exec';
 
@@ -393,10 +461,12 @@ export default function App() {
                   label="Declaração de Hipossuficiência"
                   icon={FileSignature}
                   required={true}
+                  helpText="Neste documento, o paciente declara sua condição de hipossuficiência financeira para provar que não possui condições de pagar pelo tratamento de cannabis medicinal. Esta declaração é fundamental para o processo judicial e para a solicitação do fornecimento do medicamento pelo Estado."
                   description="Documento assinado declarando incapacidade financeira (Obrigatório)."
                   actionLink="https://app.zapsign.com.br/verificar/doc/9508ca67-e761-4056-bd7c-ac69c5499bad"
                   actionLabel="Assinar Online"
                   fullWidthAction={true}
+                  onActionClick={(url) => setActiveSignatureUrl(url)}
                 />
               </div>
             </section>
@@ -424,10 +494,12 @@ export default function App() {
                   label="Procuração da Anvisa"
                   icon={FileSignature}
                   required
+                  helpText="A procuração autoriza a Desert Moon a realizar todos os trâmites administrativos junto à Anvisa em seu nome. Isso permite que nossa equipe gestione renovações, liberações e acompanhe o status da sua importação de forma direta e ágil."
                   description="Procuração devidamente assinada pelo paciente/responsável."
                   actionLink="https://app.zapsign.com.br/verificar/doc/649b7009-b6a9-4ec7-b240-0b07c37a8249"
                   actionLabel="Assinar Online"
                   fullWidthAction={true}
+                  onActionClick={(url) => setActiveSignatureUrl(url)}
                 />
               </div>
             </section>
@@ -464,6 +536,13 @@ export default function App() {
 
         </form>
       </main>
+
+      {activeSignatureUrl && (
+        <SignatureModal 
+          url={activeSignatureUrl} 
+          onClose={() => setActiveSignatureUrl(null)} 
+        />
+      )}
 
       {/* Footer */}
       <footer className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mt-16 pb-8">
